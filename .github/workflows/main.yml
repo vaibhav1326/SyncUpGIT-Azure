@@ -23,7 +23,7 @@ jobs:
       run: |
         cd ..
         GIT_CMD_REPOSITORY="https://devanshu0986@dev.azure.com/devanshu0986/Vaibhav-Repo/_git/Vaibhav-Repo" 
-        git clone $GIT_CMD_REPOSITORY
+        git clone https://devanshu0986@dev.azure.com/devanshu0986/Vaibhav-Repo/_git/Vaibhav-Repo
     - name: Copy files from git repo to azure repo
       run: |     
         cp -r Vaibhav-Repo/* SyncUpGIT-Azure/
