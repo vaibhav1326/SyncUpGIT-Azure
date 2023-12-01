@@ -1,0 +1,39 @@
+name: Git To Azure repo sync
+on: 
+  push:
+    branches: main
+    
+jobs:
+  sync_from_git_to_azure:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup environment variables
+      run: |
+        echo ::set-env name=AZUREPAT::${{ secrets.AZUREPAT }}
+        echo ::set-env name=AZUSERNAME::${{ secrets.AZUSERNAME }}
+        echo ::set-env name=AZUSER_EMAIL::${{ secrets.AZUSER_EMAIL }}
+        echo ::set-env name=AZORG::${{ secrets.AZORG }}
+    - name: Clone Git repo
+      run: |
+        git clone {{repo_url_link}}
+        cd repo_name
+        rm -rf .git
+    - name: Clone Azure Repo
+      run: |
+        cd ..
+        GIT_CMD_REPOSITORY="https://azure-repo-url" 
+        git clone $GIT_CMD_REPOSITORY
+    - name: Copy files from git repo to azure repo
+      run: |     
+        cp -r AzureDevops_FOLDER/* GitSyncfolder/
+    - name: Configure user in azure repo
+      run: |
+        cd GitSyncfolder
+        git config --global user.email "user_email"
+        git config --global user.name "user_email"
+    - name: Commit and Push changes
+      run: |
+        git add .
+        git commit -m "sync from git to azure"
+        git push
