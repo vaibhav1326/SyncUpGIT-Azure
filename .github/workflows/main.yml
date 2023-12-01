@@ -16,22 +16,22 @@ jobs:
         echo "AZORG=${{ secrets.AZORG }}" >> $GITHUB_ENV
     - name: Clone Git repo
       run: |
-        git clone {{repo_url_link}}
-        cd repo_name
+        git clone https://github.com/vaibhav1326/SyncUpGIT-Azure.git
+        cd SyncUpGIT-Azure
         rm -rf .git
     - name: Clone Azure Repo
       run: |
         cd ..
-        GIT_CMD_REPOSITORY="https://azure-repo-url" 
+        GIT_CMD_REPOSITORY="https://devanshu0986@dev.azure.com/devanshu0986/Vaibhav-Repo/_git/Vaibhav-Repo" 
         git clone $GIT_CMD_REPOSITORY
     - name: Copy files from git repo to azure repo
       run: |     
-        cp -r AzureDevops_FOLDER/* GitSyncfolder/
+        cp -r Vaibhav-Repo/* SyncUpGIT-Azure/
     - name: Configure user in azure repo
       run: |
-        cd GitSyncfolder
-        git config --global user.email "user_email"
-        git config --global user.name "user_email"
+        cd SyncUpGIT-Azure
+        git config --global user.email "vaibhavsync@gmail.com"
+        git config --global user.name "Vaibhav"
     - name: Commit and Push changes
       run: |
         git add .
