@@ -16,14 +16,13 @@ jobs:
         echo "AZORG=${{ secrets.AZORG }}" >> $GITHUB_ENV
     - name: Clone Git repo
       run: |
-        git clone https://github.com/vaibhav1326/SyncUpGIT-Azure.git
+        git clone https://Yeeoy6vmhruphg56xbwmwvq5bnapahsu3ot3sgx6z3stozastnmq@dev.azure.com/devanshu0986/Vaibhav-Repo/_git/Vaibhav-Repo
         cd SyncUpGIT-Azure
         rm -rf .git
     - name: Clone Azure Repo
       run: |
         cd ..
-        GIT_CMD_REPOSITORY="https://devanshu0986@dev.azure.com/devanshu0986/Vaibhav-Repo/_git/Vaibhav-Repo" 
-        git clone https://devanshu0986@dev.azure.com/devanshu0986/Vaibhav-Repo/_git/Vaibhav-Repo
+        git clone https://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@github.com/vaibhav1326/SyncUpGIT-Azure.git
     - name: Copy files from git repo to azure repo
       run: |     
         cp -r Vaibhav-Repo/* SyncUpGIT-Azure/
