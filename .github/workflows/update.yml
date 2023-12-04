@@ -1,0 +1,42 @@
+name: SyncAzureRepo
+on:
+  push:
+    branches: main
+jobs:
+  Script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync_script
+        run: |
+
+          echo "Starting the synchronization process"
+
+          mkdir "${{ runner.temp }}/copyrepo"
+
+          cd "${{ runner.temp }}/copyrepo"
+
+          git clone --mirror $sourceURL
+
+          cd "${{ runner.temp }}/copyrepo/SyncUpGIT-Azure.git/"
+
+          echo "*****Git removing remote origin****"       
+
+          git remote rm origin
+
+          echo "*****Git remote add****"
+
+          git remote add --mirror=fetch origin $destURL
+
+          echo "*****Git fetch origin****"
+
+          git fetch $sourceURL
+
+          git config user.name "Mayank Gupta"
+
+          git config user.email "mayank@tru.agency"
+          echo "*****Git push to Azure Repos****"
+          git push origin main -f
+
+        env:
+          sourceURL: "https://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@github.com/vaibhav1326/SyncUpGIT-Azure.git"
+          destURL: "https://Yeeoy6vmhruphg56xbwmwvq5bnapahsu3ot3sgx6z3stozastnmq@dev.azure.com/devanshu0986/Vaibhav-Repo/_git/Vaibhav-Repo"
